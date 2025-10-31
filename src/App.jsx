@@ -6,7 +6,6 @@ import HeroImage from "./components/HeroImage";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
 import ProjectDetails from "./pages/ProjectDetails";
 
 export default function App() {
