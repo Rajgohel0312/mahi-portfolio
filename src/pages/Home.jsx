@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { FaArrowDownLong, FaQuoteLeft } from "react-icons/fa6";
 import { FiMonitor } from "react-icons/fi";

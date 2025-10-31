@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { FaLightbulb, FaLaptopCode, FaUserTie, FaHeart } from "react-icons/fa";
 

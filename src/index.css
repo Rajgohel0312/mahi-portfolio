@@ -1,1 +1,98 @@
-@import url(https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap);@import "tailwindcss";:root{--brand-color:#a2366d;--brand-color-light:#c86da0;--brand-color-dark:#7d2753;--text-dark:#1c1c1c;--text-light:#f5f5f5;--font-display:"Poppins", sans-serif;--font-body:"Manrope", sans-serif}html,body{height:100%;overflow:hidden}body{font-family:var(--font-body);color:var(--text-dark);background-color:#fff;margin:0;padding:0;overflow:hidden}h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-dark);letter-spacing:-.02em}p,li,span{font-family:var(--font-body);line-height:1.7;color:var(--text-dark)}a{color:var(--brand-color);text-decoration:none;transition:color 0.3s ease}a:hover{color:var(--brand-color-light)}::selection{background:var(--brand-color);color:#fff}html,body{height:100%;overflow:hidden}main::-webkit-scrollbar{width:0;background:#fff0}main{-ms-overflow-style:none;scrollbar-width:none}button{background:var(--brand-color);color:#fff;border:none;border-radius:.5rem;padding:.75rem 1.5rem;font-family:var(--font-display);cursor:pointer;transition:background 0.3s ease}button:hover{background:var(--brand-color-dark)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#52a4b0;border-radius:10px}::-webkit-scrollbar-thumb:hover{background:#3d8d97}@keyframes lightSweep{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+:root {
+  --brand-color: #a2366d;
+  --brand-color-light: #c86da0;
+  --brand-color-dark: #7d2753;
+  --text-dark: #1c1c1c;
+  --text-light: #f5f5f5;
+  --font-display: "Poppins", sans-serif;
+  --font-body: "Manrope", sans-serif;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+}
+p,
+li,
+span {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  color: var(--text-dark);
+}
+a {
+  color: var(--brand-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--brand-color-light);
+}
+::selection {
+  background: var(--brand-color);
+  color: #fff;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+main::-webkit-scrollbar {
+  width: 0;
+  background: #fff0;
+}
+main {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+button {
+  background: var(--brand-color);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: var(--brand-color-dark);
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #52a4b0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d8d97;
+}
+@keyframes lightSweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -1,7 +1,7 @@
+import React from "react";
 import { motion } from "framer-motion";
 import DesignPhilosophy from "../components/DesignPhilosophy";
 import Footer from "../components/Footer";
-
 export default function About() {
   return (
     <section
