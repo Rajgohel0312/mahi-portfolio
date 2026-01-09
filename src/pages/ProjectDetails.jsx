@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaExternalLinkAlt } from "react-icons/fa";
@@ -7,159 +7,149 @@ import Footer from "../components/Footer";
 const ProjectDetails = () => {
   const { state: project } = useLocation();
   const navigate = useNavigate();
-
+  const [isPortrait, setIsPortrait] = useState(false);
+  const videoRef = useRef(null);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (!project)
-    return (
-      <div className="flex flex-col items-center justify-center h-screen text-center bg-gray-50">
-        <p className="text-gray-600 text-lg mb-4">Project not found.</p>
-        <button
-          onClick={() => navigate("/")}
-          className="px-5 py-2 rounded-md bg-[var(--brand-color)] text-white hover:opacity-90 transition"
-        >
-          Back to Portfolio
-        </button>
-      </div>
-    );
+  if (!project) return null;
 
   return (
-    <section className="w-full bg-white text-gray-900 overflow-hidden">
-      {/* ===== HERO ===== */}
-      <div className="relative flex flex-col items-center text-center bg-white pb-4 sm:pb-8">
-        {/* Hero Content */}
-        <div className="pt-10 sm:pt-14 pb-0">
-          <motion.p
-            className="uppercase !text-[var(--brand-color)] tracking-[3px] text-[10px] sm:text-xs font-semibold mb-1 sm:mb-2"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            Case Study
-          </motion.p>
+    <section className="bg-white text-gray-900">
+      <div className="text-center pt-16 pb-8">
+        <p className="uppercase tracking-widest text-xs text-[var(--brand-color)]">
+          Case Study
+        </p>
+        <h1 className="text-3xl md:text-4xl font-bold mt-2">{project.title}</h1>
+        <p className="uppercase text-xs tracking-wider text-gray-500 mt-1">
+          {project.category}
+        </p>
+      </div>
 
-          <motion.h1
-            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-1 sm:mb-2"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {project.title}
-          </motion.h1>
-
-          <p className="uppercase tracking-wider text-gray-500 text-[10px] sm:text-xs md:text-sm">
-            {project.category}
-          </p>
-        </div>
-
-        {/* MacBook Mockup */}
+      {/* UI/UX */}
+      {project.type === "uiux" && (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative w-[260px] sm:w-[420px] md:w-[620px] lg:w-[740px] -mt-6 sm:-mt-10"
+          animate={{ opacity: 1, y: 0 }}
+          className="relative max-w-4xl mx-auto"
         >
           <img
             src="/assets/project/laptop.webp"
             alt="Laptop Mockup"
-            className="relative z-10 w-full h-auto pointer-events-none select-none drop-shadow-2xl"
+            className="w-full drop-shadow-2xl"
           />
 
           <div
-            className="absolute overflow-y-scroll rounded-[3px] shadow-inner scrollbar-hide bg-white"
+            className="absolute bg-white overflow-hidden"
             style={{
               top: "27.5%",
               left: "16.3%",
               width: "67.6%",
               height: "42.6%",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
             }}
           >
             <motion.img
-              src={project.designImage || project.image}
-              alt={`${project.title} design`}
-              className="w-full h-auto object-top"
+              src={project.image}
               animate={{ y: ["0%", "-25%"] }}
               transition={{
                 duration: 14,
-                ease: "linear",
                 repeat: Infinity,
                 repeatType: "reverse",
+                ease: "linear",
               }}
+              className="w-full"
             />
           </div>
         </motion.div>
-      </div>
+      )}
 
-      {/* ===== CONTENT ===== */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-10">
-        {/* Back Button */}
+      {/* GRAPHICS */}
+      {project.type === "graphics" && (
+        <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {project.posters.map((src, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="rounded-xl overflow-hidden bg-gray-100"
+            >
+              <img src={src} className="w-full h-auto" />
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* VIDEO */}
+      {project.type === "video" && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="max-w-4xl mx-auto px-4"
+        >
+          <div
+            className={`relative w-full ${
+              isPortrait
+                ? "aspect-[9/16] max-w-[220px] sm:max-w-[260px] md:max-w-[400px] mx-auto"
+                : "aspect-video"
+            }`}
+          >
+            <video
+              ref={videoRef}
+              controls
+              muted
+              playsInline
+              preload="metadata"
+              onLoadedMetadata={() => {
+                const video = videoRef.current;
+                if (!video) return;
+                setIsPortrait(video.videoHeight > video.videoWidth);
+              }}
+              className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg"
+            >
+              <source src={project.video} type="video/mp4" />
+            </video>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="max-w-3xl mx-auto px-4 py-12 space-y-6">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-600 !hover:text-[var(--brand-color)] text-xs sm:text-sm transition"
+          className="flex items-center gap-2 text-sm text-gray-600"
         >
           <FaArrowLeft size={12} /> Back
         </button>
 
-        {/* Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-base sm:text-lg font-semibold !text-[var(--brand-color)] mb-1">
-            Timeline
-          </h2>
-          <p className="text-gray-700 text-xs sm:text-sm">{project.timeline}</p>
-        </motion.div>
-
-        {/* Learnings */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <h2 className="text-base sm:text-lg font-semibold !text-[var(--brand-color)] mb-2">
+        <div>
+          <h2 className="font-semibold text-[var(--brand-color)]">
             What I Learned
           </h2>
-          <ul className="list-disc pl-5 space-y-1 text-gray-700 text-[13px] sm:text-[14px] leading-relaxed">
+          <ul className="list-disc pl-5 text-sm">
             {project.learnings.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
-        {/* Impact */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <h2 className="text-base sm:text-lg font-semibold !text-[var(--brand-color)] mb-2">
+        <div>
+          <h2 className="font-semibold text-[var(--brand-color)]">
             Business Impact
           </h2>
-          <p className="text-gray-700 text-[13px] sm:text-[14px] leading-relaxed">
-            {project.impact}
-          </p>
-        </motion.div>
+          <p className="text-sm">{project.impact}</p>
+        </div>
 
-        {/* Live Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center pt-2 sm:pt-4"
-        >
+        {project.link && (
           <a
             href={project.link}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center gap-2 text-gray-700 !hover:text-[var(--brand-color)] text-xs sm:text-sm transition"
+            className="inline-flex items-center gap-2 text-sm"
           >
             View Live <FaExternalLinkAlt size={12} />
           </a>
-        </motion.div>
+        )}
       </div>
 
       <Footer />
