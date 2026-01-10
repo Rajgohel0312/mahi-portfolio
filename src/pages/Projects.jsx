@@ -74,12 +74,12 @@ const projects = [
     ],
     impact: "Strengthened brand identity and improved visual consistency.",
     posters: [
-      "/assets/graphics/project(1).webp",
-      "/assets/graphics/project(2).webp",
-      "/assets/graphics/project(3).webp",
-      "/assets/graphics/project(4).webp",
-      "/assets/graphics/project(5).webp",
-      "/assets/graphics/project(6).webp",
+      "/assets/graphics/projects(1).webp",
+      "/assets/graphics/projects(2).webp",
+      "/assets/graphics/projects(3).webp",
+      "/assets/graphics/projects(4).webp",
+      "/assets/graphics/projects(5).webp",
+      "/assets/graphics/projects(6).webp",
     ],
   },
 
@@ -99,21 +99,7 @@ const projects = [
       "Helped elevate the restaurant’s premium brand image and increased reel engagement and profile visits on social media.",
     video: "/assets/video/restaurant_promo.mp4",
   },
-  {
-    id: "restaurant-reel",
-    type: "video",
-    category: "Motion / Video",
-    title: "Restaurant Motion Reel",
-    image: "/assets/graphics/restaurant_reel.webp",
-    learnings: [
-      "Cinematic food storytelling using controlled close-up and macro shots.",
-      "Editing for rhythm, pacing, and beat-synced transitions.",
-      "Advanced color grading to enhance food texture, warmth, and premium ambience.",
-    ],
-    impact:
-      "Strengthened the restaurant’s premium visual identity, increased reel engagement, and drove higher profile visits across social platforms.",
-    video: "/assets/video/restaurant_reel.mp4",
-  },
+  
 ];
 
 const Projects = () => {
